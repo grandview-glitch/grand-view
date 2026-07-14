@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MIX — Dance × Music</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700;800;900&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+  :root{
+    --bg:#1C1730;
+    --bg-soft:#241C3D;
+    --bg-card:#2A2147;
+    --ink:#F5F2EA;
+    --ink-dim:#B5ADD4;
+    --coral:#FF5A36;
+    --teal:#2EC4B6;
+    --yellow:#FFC857;
+    --pink:#FF4FA3;
+    --line:rgba(245,242,234,0.12);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Manrope',sans-serif;
+    overflow-x:hidden;
+  }
+  h1,h2,h3,.display{
+    font-family:'Unbounded',sans-serif;
+    font-weight:800;
+    letter-spacing:-0.01em;
+    line-height:1.05;
+  }
+  a{color:inherit;text-decoration:none;}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 32px;}
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:10px;
+    font-size:13px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;
+    color:var(--ink-dim);
+  }
+  .eyebrow::before{content:"";width:18px;height:2px;background:var(--pink);display:inline-block;}
+
+  /* ===== Header ===== */
+  header{
+    position:sticky;top:0;z-index:50;
+    background:rgba(28,23,48,0.85);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .header-inner{
+    max-width:1180px;margin:0 auto;padding:18px 32px;
+    display:flex;align-items:center;justify-content:space-between;
+  }
+  .logo{font-family:'Unbounded';font-weight:900;font-size:24px;letter-spacing:-0.02em;}
+  .logo span{color:var(--coral);}
+  nav.main-nav{display:flex;gap:36px;}
+  nav.main-nav a{
+    font-size:14px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
+    color:var(--ink-dim);transition:color .2s;
+    position:relative;
+  }
+  nav.main-nav a:hover, nav.main-nav a:focus-visible{color:var(--ink);}
+  nav.main-nav a::after{
+    content:"";position:absolute;left:0;bottom:-6px;height:2px;width:0%;
+    background:var(--pink);transition:width .25s;
+  }
+  nav.main-nav a:hover::after{width:100%;}
+  .header-social{display:flex;gap:16px;font-size:16px;color:var(--ink-dim);}
+  .header-social a:hover{color:var(--yellow);}
+
+  /* ===== Hero ===== */
+  .hero{
+    position:relative;
+    padding:120px 0 80px;
+    text-align:center;
+    overflow:hidden;
+  }
+  .hero .wrap{position:relative;z-index:2;}
+  .eq-bg{
+    position:absolute;inset:0;display:flex;align-items:flex-end;justify-content:center;
+    gap:6px;opacity:.18;z-index:1;padding-bottom:0;
+  }
+  .eq-bg span{
+    width:10px;background:linear-gradient(180deg,var(--coral),var(--pink));
+    border-radius:4px 4px 0 0;
+    animation:bounce 1.4s ease-in-out infinite;
+  }
+  @keyframes bounce{
+    0%,100%{height:30px;}
+    50%{height:160px;}
+  }
+  .hero-title{
+    font-size:clamp(64px,14vw,168px);
+    font-weight:900;
+    margin:18px 0 22px;
+  }
+  .hero-title em{
+    font-style:normal;
+    background:linear-gradient(95deg,var(--coral),var(--pink) 55%,var(--yellow));
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  .hero-sub{
+    font-size:18px;color:var(--ink-dim);max-width:520px;margin:0 auto 36px;
+    font-weight:500;
+  }
+  .hero-ctas{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;}
+  .btn{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:15px 28px;border-radius:999px;font-weight:700;font-size:14px;
+    letter-spacing:.04em;text-transform:uppercase;
+    border:2px solid transparent;transition:transform .2s, background .2s, color .2s;
+    cursor:pointer;
+  }
+  .btn-primary{background:var(--ink);color:var(--bg);}
+  .btn-primary:hover{transform:translateY(-2px);background:var(--yellow);}
+  .btn-outline{border-color:var(--line);color:var(--ink);}
+  .btn-outline:hover{border-color:var(--ink);transform:translateY(-2px);}
+
+  /* ===== Pop Nav Cards ===== */
+  .card-grid{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:18px;
+    padding:0 32px 100px;max-width:1180px;margin:0 auto;
+  }
+  .pop-card{
+    position:relative;
+    aspect-ratio:1/0.92;
+    border-radius:22px;
+    padding:28px;
+    display:flex;flex-direction:column;justify-content:space-between;
+    overflow:hidden;
+    transition:transform .35s cubic-bezier(.2,.8,.2,1);
+  }
+  .pop-card:hover{transform:translateY(-8px) rotate(-0.4deg);}
+  .pop-card .tag{font-size:13px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;}
+  .pop-card h3{font-size:clamp(28px,4vw,40px);color:#fff;}
+  .pop-card p{font-size:14px;font-weight:600;max-width:80%;}
+  .pop-card .go{
+    align-self:flex-end;width:44px;height:44px;border-radius:50%;
+    background:rgba(0,0,0,0.18);display:flex;align-items:center;justify-content:center;
+    font-size:18px;color:#fff;transition:transform .25s;
+  }
+  .pop-card:hover .go{transform:rotate(45deg);}
+  .pop-card .mini-eq{position:absolute;right:24px;top:24px;display:flex;gap:4px;align-items:flex-end;height:30px;opacity:.5;}
+  .pop-card .mini-eq span{width:5px;background:#fff;border-radius:2px;animation:bounce 1.1s ease-in-out infinite;}
+  .card-event{background:linear-gradient(150deg,var(--coral),#C9341A);}
+  .card-event .tag{color:#FFD9CC;}
+  .card-event p{color:#FFE3D9;}
+  .card-music{background:linear-gradient(150deg,var(--teal),#0E8C81);}
+  .card-music .tag{color:#D2FFF8;}
+  .card-music p{color:#DCFFF9;}
+  .card-dance{background:linear-gradient(150deg,var(--yellow),#E0962B);}
+  .card-dance .tag,.card-dance p{color:#3A2700;}
+  .card-dance h3{color:#241300;}
+  .card-dance .go{background:rgba(0,0,0,0.12);color:#241300;}
+
+  /* ===== Section shared ===== */
+  section.content{padding:100px 0;border-top:1px solid var(--line);}
+  .section-head{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:20px;margin-bottom:48px;}
+  .section-head h2{font-size:clamp(36px,5vw,56px);}
+  .section-head p.lead{max-width:420px;color:var(--ink-dim);font-weight:500;font-size:15px;line-height:1.7;}
+
+  /* EVENT section */
+  .event-info{
+    display:grid;grid-template-columns:1fr 1fr;gap:40px;margin-bottom:56px;
+  }
+  .event-copy p{color:var(--ink-dim);line-height:1.9;font-size:15px;margin-bottom:16px;}
+  .event-detail-box{
+    background:var(--bg-card);border:1px solid var(--line);border-radius:18px;padding:28px;
+  }
+  .event-detail-box dl{display:grid;grid-template-columns:90px 1fr;gap:14px 12px;font-size:14px;}
+  .event-detail-box dt{color:var(--ink-dim);font-weight:700;}
+  .event-detail-box dd{font-weight:600;}
+  .event-detail-box .btn{margin-top:20px;width:100%;justify-content:center;}
+
+  .video-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
+  .video-card{
+    position:relative;aspect-ratio:16/10;border-radius:16px;overflow:hidden;
+    background:linear-gradient(160deg,var(--bg-card),#1A1530);
+    display:flex;align-items:center;justify-content:center;
+    border:1px solid var(--line);
+    cursor:pointer;
+  }
+  .video-card .play{
+    width:56px;height:56px;border-radius:50%;background:rgba(255,255,255,0.12);
+    display:flex;align-items:center;justify-content:center;font-size:18px;
+    transition:transform .25s, background .25s;
+  }
+  .video-card:hover .play{transform:scale(1.1);background:var(--coral);}
+  .video-card .vcaption{
+    position:absolute;bottom:12px;left:14px;font-size:12px;font-weight:700;
+    letter-spacing:.04em;text-transform:uppercase;color:var(--ink-dim);
+  }
+
+  /* MUSIC section */
+  .track-list{display:flex;flex-direction:column;border-top:1px solid var(--line);}
+  .track-row{
+    display:grid;grid-template-columns:50px 1fr 120px 60px;align-items:center;gap:18px;
+    padding:22px 8px;border-bottom:1px solid var(--line);transition:background .2s;
+  }
+  .track-row:hover{background:rgba(245,242,234,0.03);}
+  .track-row .num{font-family:'Unbounded';font-weight:700;color:var(--ink-dim);font-size:14px;}
+  .track-title{font-weight:700;font-size:16px;}
+  .track-sub{font-size:13px;color:var(--ink-dim);margin-top:2px;}
+  .track-wave{display:flex;gap:3px;align-items:center;height:24px;}
+  .track-wave span{width:3px;background:var(--teal);border-radius:2px;}
+  .track-dur{font-size:13px;color:var(--ink-dim);text-align:right;}
+  .track-play{
+    width:38px;height:38px;border-radius:50%;border:1px solid var(--line);
+    display:flex;align-items:center;justify-content:center;font-size:13px;
+    transition:background .2s,border-color .2s;
+  }
+  .track-row:hover .track-play{background:var(--teal);border-color:var(--teal);color:#04201D;}
+
+  /* DANCE / PROFILE */
+  .profile-grid{display:grid;grid-template-columns:320px 1fr;gap:48px;align-items:start;}
+  .profile-photo{
+    aspect-ratio:4/5;border-radius:20px;
+    background:linear-gradient(160deg,var(--pink),#5A1E45);
+    display:flex;align-items:center;justify-content:center;
+    font-family:'Unbounded';font-weight:800;color:rgba(255,255,255,.5);font-size:14px;
+    border:1px solid var(--line);
+  }
+  .profile-bio p{color:var(--ink-dim);line-height:1.9;font-size:15px;margin-bottom:18px;}
+  .tag-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:8px;}
+  .tag-pill{
+    font-size:12px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;
+    padding:8px 14px;border-radius:999px;border:1px solid var(--line);color:var(--ink-dim);
+  }
+  .dance-video-grid{
+    margin-top:44px;display:grid;grid-template-columns:repeat(4,1fr);gap:16px;
+  }
+  .dance-video-grid .video-card{aspect-ratio:9/12;}
+
+  /* ===== Footer ===== */
+  footer{border-top:1px solid var(--line);padding:56px 0 36px;}
+  .footer-inner{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:24px;}
+  .footer-social{display:flex;gap:20px;font-size:18px;}
+  .footer-social a{
+    width:42px;height:42px;border-radius:50%;border:1px solid var(--line);
+    display:flex;align-items:center;justify-content:center;color:var(--ink-dim);
+    transition:all .2s;
+  }
+  .footer-social a:hover{color:var(--bg);background:var(--yellow);border-color:var(--yellow);}
+  .footer-copy{font-size:13px;color:var(--ink-dim);}
+
+  /* ===== Responsive ===== */
+  @media (max-width:860px){
+    .card-grid{grid-template-columns:1fr;}
+    .event-info{grid-template-columns:1fr;}
+    .video-grid{grid-template-columns:1fr 1fr;}
+    .profile-grid{grid-template-columns:1fr;}
+    .dance-video-grid{grid-template-columns:repeat(2,1fr);}
+    nav.main-nav{display:none;}
+    .header-inner{padding:16px 20px;}
+    .wrap{padding:0 20px;}
+    .card-grid{padding:0 20px 70px;}
+  }
+  @media (prefers-reduced-motion: reduce){
+    .eq-bg span,.mini-eq span,.track-wave span{animation:none !important;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="logo">MIX<span>.</span></div>
+    <nav class="main-nav">
+      <a href="#event">Event</a>
+      <a href="#music">Music</a>
+      <a href="#dance">Dance</a>
+    </nav>
+    <div class="header-social">
+      <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+      <a href="#" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+      <a href="#" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+      <a href="#" aria-label="X"><i class="fa-brands fa-x-twitter"></i></a>
+    </div>
+  </div>
+</header>
+
+<!-- ===== HERO ===== -->
+<section class="hero">
+  <div class="eq-bg" aria-hidden="true">
+    <span style="animation-delay:0s"></span><span style="animation-delay:.1s"></span>
+    <span style="animation-delay:.2s"></span><span style="animation-delay:.3s"></span>
+    <span style="animation-delay:.4s"></span><span style="animation-delay:.5s"></span>
+    <span style="animation-delay:.6s"></span><span style="animation-delay:.7s"></span>
+    <span style="animation-delay:.8s"></span><span style="animation-delay:.9s"></span>
+    <span style="animation-delay:1.0s"></span><span style="animation-delay:1.1s"></span>
+  </div>
+  <div class="wrap">
+    <span class="eyebrow">Dance × Music × Live</span>
+    <h1 class="hero-title">主催イベント<br><em>MIX</em></h1>
+    <p class="hero-sub">音とダンスが重なる場所。ダンスイベント「MIX」の主催、楽曲制作、自身のダンス活動をひとつにまとめたホームページです。</p>
+    <div class="hero-ctas">
+      <a href="#event" class="btn btn-primary">次のMIXをチェック</a>
+      <a href="#music" class="btn btn-outline">楽曲を聴く</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== POP NAV CARDS ===== -->
+<div class="card-grid">
+  <a href="#event" class="pop-card card-event">
+    <div class="mini-eq" aria-hidden="true"><span style="height:10px"></span><span style="height:20px"></span><span style="height:14px"></span><span style="height:24px"></span></div>
+    <span class="tag">Event</span>
+    <div>
+      <h3>MIX<br>イベント</h3>
+      <p>日程・会場・チケット情報と当日の様子</p>
+    </div>
+    <span class="go"><i class="fa-solid fa-arrow-right"></i></span>
+  </a>
+  <a href="#music" class="pop-card card-music">
+    <div class="mini-eq" aria-hidden="true"><span style="height:16px"></span><span style="height:26px"></span><span style="height:12px"></span><span style="height:20px"></span></div>
+    <span class="tag">Music</span>
+    <div>
+      <h3>制作楽曲</h3>
+      <p>配信中のオリジナル楽曲を一覧で</p>
+    </div>
+    <span class="go"><i class="fa-solid fa-arrow-right"></i></span>
+  </a>
+  <a href="#dance" class="pop-card card-dance">
+    <div class="mini-eq" aria-hidden="true"><span style="height:12px"></span><span style="height:22px"></span><span style="height:18px"></span><span style="height:10px"></span></div>
+    <span class="tag">Dance / Profile</span>
+    <div>
+      <h3>ダンス &<br>プロフィール</h3>
+      <p>ダンス動画と自己紹介</p>
+    </div>
+    <span class="go"><i class="fa-solid fa-arrow-right"></i></span>
+  </a>
+</div>
+
+<!-- ===== EVENT ===== -->
+<section class="content" id="event">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Event<br>「MIX」</h2>
+      <p class="lead">ダンスと音楽をミックスするイベント「MIX」を主催しています。ライブDJ・ダンスパフォーマンス・オープンフロアで構成された参加型イベントです。</p>
+    </div>
+
+    <div class="event-info">
+      <div class="event-copy">
+        <p>「MIX」は、ダンスとライブミュージックが同じフロアで混ざり合うイベントです。出演者によるパフォーマンスのあとは、誰でも参加できるオープンフロアタイムに。観るだけでも、踊るだけでも楽しめます。</p>
+        <p>不定期開催。最新の日程・会場・出演者情報はこのページとSNSで更新します。</p>
+      </div>
+      <div class="event-detail-box">
+        <dl>
+          <dt>次回</dt><dd>2026.09.20（日）</dd>
+          <dt>会場</dt><dd>会場名・住所をここに記載</dd>
+          <dt>時間</dt><dd>OPEN 18:00 / START 19:00</dd>
+          <dt>料金</dt><dd>前売 ¥2,500 / 当日 ¥3,000</dd>
+        </dl>
+        <a href="#" class="btn btn-primary">チケット情報・予約</a>
+      </div>
+    </div>
+
+    <!-- イベント風景の動画。下記カードを実際の動画(YouTube埋め込みなど)に置き換えてください -->
+    <div class="video-grid">
+      <div class="video-card"><span class="play"><i class="fa-solid fa-play"></i></span><span class="vcaption">MIX vol.3 ダイジェスト</span></div>
+      <div class="video-card"><span class="play"><i class="fa-solid fa-play"></i></span><span class="vcaption">DJタイム</span></div>
+      <div class="video-card"><span class="play"><i class="fa-solid fa-play"></i></span><span class="vcaption">オープンフロア</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== MUSIC ===== -->
+<section class="content" id="music">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Music</h2>
+      <p class="lead">制作したオリジナル楽曲です。各種音楽配信サービスでも公開しています。</p>
+    </div>
+
+    <!-- トラック一覧。再生ボタンは外部の配信リンク(SpotifyやSoundCloud等)に置き換えてください -->
+    <div class="track-list">
+      <div class="track-row">
+        <span class="num">01</span>
+        <div><div class="track-title">トラック名 A</div><div class="track-sub">Original Mix</div></div>
+        <div class="track-wave" aria-hidden="true">
+          <span style="height:8px"></span><span style="height:18px"></span><span style="height:12px"></span>
+          <span style="height:22px"></span><span style="height:10px"></span><span style="height:16px"></span>
+        </div>
+        <span class="track-dur">3:42</span>
+        <a href="#" class="track-play"><i class="fa-solid fa-play"></i></a>
+      </div>
+      <div class="track-row">
+        <span class="num">02</span>
+        <div><div class="track-title">トラック名 B</div><div class="track-sub">Remix</div></div>
+        <div class="track-wave" aria-hidden="true">
+          <span style="height:14px"></span><span style="height:9px"></span><span style="height:20px"></span>
+          <span style="height:13px"></span><span style="height:24px"></span><span style="height:11px"></span>
+        </div>
+        <span class="track-dur">4:05</span>
+        <a href="#" class="track-play"><i class="fa-solid fa-play"></i></a>
+      </div>
+      <div class="track-row">
+        <span class="num">03</span>
+        <div><div class="track-title">トラック名 C</div><div class="track-sub">EP収録曲</div></div>
+        <div class="track-wave" aria-hidden="true">
+          <span style="height:20px"></span><span style="height:12px"></span><span style="height:16px"></span>
+          <span style="height:9px"></span><span style="height:18px"></span><span style="height:14px"></span>
+        </div>
+        <span class="track-dur">2:58</span>
+        <a href="#" class="track-play"><i class="fa-solid fa-play"></i></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== DANCE / PROFILE ===== -->
+<section class="content" id="dance">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Dance &<br>Profile</h2>
+      <p class="lead">ダンサーとしての活動内容と自己紹介です。</p>
+    </div>
+
+    <div class="profile-grid">
+      <!-- プロフィール写真。背景の文字をご自身の写真に置き換えてください -->
+      <div class="profile-photo">PROFILE PHOTO</div>
+      <div class="profile-bio">
+        <h3 style="font-size:28px;margin-bottom:14px;">名前を入力</h3>
+        <p>ダンサー / イベントオーガナイザー / トラックメイカー。〇〇年からダンスを始め、現在は楽曲制作とイベント主催「MIX」を中心に活動しています。ここに経歴やスタイル、活動への思いを記載してください。</p>
+        <div class="tag-row">
+          <span class="tag-pill">Hip Hop</span>
+          <span class="tag-pill">House</span>
+          <span class="tag-pill">Choreography</span>
+          <span class="tag-pill">DJ</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ダンス動画一覧。下記カードを実際の動画に置き換えてください -->
+    <div class="dance-video-grid">
+      <div class="video-card"><span class="play"><i class="fa-solid fa-play"></i></span><span class="vcaption">Freestyle 01</span></div>
+      <div class="video-card"><span class="play"><i class="fa-solid fa-play"></i></span><span class="vcaption">Choreo 02</span></div>
+      <div class="video-card"><span class="play"><i class="fa-solid fa-play"></i></span><span class="vcaption">Battle 03</span></div>
+      <div class="video-card"><span class="play"><i class="fa-solid fa-play"></i></span><span class="vcaption">Session 04</span></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap footer-inner">
+    <div class="logo" style="font-size:20px;">MIX<span>.</span></div>
+    <div class="footer-social">
+      <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+      <a href="#" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+      <a href="#" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+      <a href="#" aria-label="X"><i class="fa-brands fa-x-twitter"></i></a>
+    </div>
+    <div class="footer-copy">© 2026 MIX. All rights reserved.</div>
+  </div>
+</footer>
+
+</body>
+</html>
